@@ -76,15 +76,21 @@ function TaskSkeleton() {
   );
 }
 
-export default function TaskList({ tasks, onToggleDone, onDelete, onReorder, isLoading }) {
+export default function TaskList({ tasks, onToggleDone, onDelete, onReorder, isLoading, sort}) {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     if (!isLoading) {
-      const sorted = [...tasks].sort((a, b) => a.priority - b.priority);
+      const sorted = [...tasks].sort((a, b) => {
+        if (sort === 'priority_desc') {
+          return b.priority - a.priority;
+        } else {
+          return a.priority - b.priority;
+        }
+      });
       setItems(sorted);
     }
-  }, [tasks, isLoading]);
+  }, [tasks, isLoading, sort]);
 
   const sensors = useSensors(useSensor(PointerSensor));
 
@@ -121,7 +127,7 @@ export default function TaskList({ tasks, onToggleDone, onDelete, onReorder, isL
   }
 
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} autoScroll={false}>
       <SortableContext items={items.map((task) => task._id)} strategy={rectSortingStrategy}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-5 px-2">
           {items.map((task) => (

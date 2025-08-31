@@ -92,6 +92,7 @@ export default function MainPage() {
       onDelete={handleDelete}
       onReorder={updateTaskPriority}
       isLoading={isLoading}
+      sort={filters.sort}
     />
     </div>
   );
