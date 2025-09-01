@@ -142,6 +142,3 @@ dist
 
 /src/uploads/avatars/*
 !/src/uploads/avatars/.gitkeep
-
-/src/uploads/messages/*
-!/src/uploads/messages/.gitkeep

@@ -2,8 +2,9 @@ import createHttpError from "http-errors";
 
 import Task from "../db/models/Tasks.js";
 
-export const listTasks = async ({ search, status, sort, category }) => {
-  const filter = {};
+export const listTasks = async ({ search, status, sort, category, owner }) => {
+  const filter = { owner };
+
   if (search) filter.$or = [
     { title: new RegExp(search, "i") },
     { description: new RegExp(search, "i") },
@@ -17,10 +18,9 @@ export const listTasks = async ({ search, status, sort, category }) => {
   else if (sort === "priority_desc") query = query.sort({ priority: -1 });
   else query = query.sort({ createdAt: -1 });
 
-
-  let result = query.exec();
-  return result;
+  return await query.exec();
 };
+
 
 export const createTask = async (data) => {
   const task = new Task(data);
@@ -31,18 +31,22 @@ export const createTask = async (data) => {
   }
 };
 
-export const updateTask = async (id, data) => {
-  const task = await Task.findByIdAndUpdate(id, data, { new: true, runValidators: true });
+export const updateTask = async (id, data, userId) => {
+  const task = await Task.findOneAndUpdate(
+    { _id: id, owner: userId },
+    data,
+    { new: true, runValidators: true }
+  );
   if (!task) {
-    throw createHttpError(404, "Task not found");
+    throw createHttpError(404, "Task not found or access denied");
   }
   return task;
 };
 
-export const deleteTask = async (id) => {
-  const task = await Task.findByIdAndDelete(id);
+export const deleteTask = async (id, userId) => {
+  const task = await Task.findOneAndDelete({ _id: id, owner: userId });
   if (!task) {
-    throw createHttpError(404, "Task not found");
+    throw createHttpError(404, "Task not found or access denied");
   }
   return task;
 };
