@@ -19,10 +19,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials(state, action) {
-      state.user = {
-        name: action.payload.user?.name || null,
-        email: action.payload.user?.email || null,
-      };
+      state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
     },
@@ -40,8 +37,8 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload.user || { name: null, email: null };
-        state.token = action.payload.token || null;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
@@ -56,7 +53,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(logIn.fulfilled, (state, action) => {
-        state.user = action.payload.user || { name: null, email: null };
+        state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isLoading = false;

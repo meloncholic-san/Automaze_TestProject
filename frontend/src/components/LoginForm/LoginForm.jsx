@@ -7,6 +7,8 @@ import { logIn } from "../../redux/auth/operations";
 import { clearAuthError } from "../../redux/auth/slice";
 import { toast } from "react-toastify";
 import css from "./LoginForm.module.css";
+import { Link } from "react-router-dom";
+
 
 const LoginSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -60,6 +62,13 @@ export default function LoginForm() {
             </button>
           </Form>
         </Formik>
+        
+        <p className={css.switchText}>
+          Don't have an account?{" "}
+          <Link to="/auth/register" className={css.switchLink}>
+            Register
+          </Link>
+        </p>
       </div>
     </div>
   );

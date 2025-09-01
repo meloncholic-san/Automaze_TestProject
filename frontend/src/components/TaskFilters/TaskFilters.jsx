@@ -45,7 +45,7 @@ export default function TaskFilters() {
 
  return (
     <div className="mb-6 p-3 border bg-white border-gray-300 rounded-md shadow-sm flex flex-col gap-3">
-      {/* Top row: Search + Filters */}
+      {/* Search + Filters */}
       <div className="flex justify-between items-center flex-wrap gap-4">
         {/* Search */}
         <div className="relative w-full max-w-sm flex-shrink-0">
@@ -76,7 +76,7 @@ export default function TaskFilters() {
             <select
               value={status}
               onChange={(e) => dispatch(setStatus(e.target.value))}
-              className="appearance-none border border-gray-300 rounded-md p-2 pr-8 text-sm bg-white"
+              className="appearance-none border border-gray-300 rounded-md p-2 pr-8 text-sm bg-white cursor-pointer"
             >
               <option value="all">All Tasks</option>
               <option value="done">Done</option>
@@ -94,7 +94,7 @@ export default function TaskFilters() {
             <select
               value={sort}
               onChange={(e) => dispatch(setSort(e.target.value))}
-              className="appearance-none border border-gray-300 rounded-md p-2 pr-8 text-sm bg-white"
+              className="appearance-none border border-gray-300 rounded-md p-2 pr-8 text-sm bg-white cursor-pointer"
             >
               <option value="priority_asc">Priority Ascending</option>
               <option value="priority_desc">Priority Descending</option>
@@ -111,7 +111,7 @@ export default function TaskFilters() {
             <select
               value={category}
               onChange={(e) => dispatch(setCategory(e.target.value))}
-              className="appearance-none border border-gray-300 rounded-md p-2 pr-8 text-sm bg-white"
+              className="appearance-none border border-gray-300 rounded-md p-2 pr-8 text-sm bg-white cursor-pointer"
             >
               <option value="">All Categories</option>
               {Object.entries(CATEGORY_OPTIONS).map(([key, value]) => (
@@ -129,7 +129,7 @@ export default function TaskFilters() {
         </div>
       </div>
 
-      {/* Reset Button - Bottom row */}
+      {/* Reset Button */}
       <div className="flex justify-start">
         <button
           onClick={() => {

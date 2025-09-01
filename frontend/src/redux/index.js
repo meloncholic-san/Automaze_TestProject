@@ -1,4 +1,6 @@
 import axios from "axios";
+import { selectToken } from "./auth/selectors";
+
 const isProd = import.meta.env.PROD;
 
 export const api = axios.create({

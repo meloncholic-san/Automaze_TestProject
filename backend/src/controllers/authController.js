@@ -29,3 +29,7 @@ export const loginUserCtrl = async (req, res) => {
     data,
   });
 };
+
+export const logoutUserCtrl = async (req, res) => {
+  res.status(204).send(); 
+};

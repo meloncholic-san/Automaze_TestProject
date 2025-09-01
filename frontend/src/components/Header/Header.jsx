@@ -4,7 +4,8 @@ import { useState } from "react";
 import { logOut } from "../../redux/auth/operations.js";
 import css from "./Header.module.css";
 import logo from "/logo/logo.jpg";
-
+import { resetFilters } from "../../redux/filters/slice.js";
+import { resetTasks } from "../../redux/tasks/slice.js";
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,8 +14,10 @@ export default function Header() {
 
   const handleLogout = async () => {
     await dispatch(logOut());
+    await dispatch(resetFilters());
+    await dispatch(resetTasks());
     // window.location.reload();
-    navigate("/");
+    navigate("/auth/login");
   };
 
   return (

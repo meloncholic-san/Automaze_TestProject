@@ -7,12 +7,13 @@ export const register = createAsyncThunk(
     try {
       const response = await api.post("/api/auth/register", credentials, {
         headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+          'Content-Type': 'multipart/form-data',
+        },
       });
-      const { name, email, accessToken, avatarUrl } = response.data.data;
+      console.log('Response data:', response.data.data);
 
-
+      const { user, accessToken } = response.data.data;
+      const { name, email, avatarUrl } = user;
 
       return {
         user: { name, email, avatarUrl },
@@ -25,14 +26,17 @@ export const register = createAsyncThunk(
     }
   }
 );
+
 
 export const logIn = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
       const response = await api.post("/api/auth/login", credentials);
-      const { name, email, avatarUrl, accessToken } = response.data.data;
+      console.log('Response data:', response.data.data);
 
+      const { user, accessToken } = response.data.data;
+      const { name, email, avatarUrl } = user;
 
       return {
         user: { name, email, avatarUrl },
@@ -45,6 +49,7 @@ export const logIn = createAsyncThunk(
     }
   }
 );
+
 
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {

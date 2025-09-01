@@ -29,7 +29,7 @@ const DatePickerField = ({ name }) => {
       dateFormat="MMMM d, yyyy h:mm aa"
       placeholderText="Select due time and date"
       minDate={new Date()}
-      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="w-[270px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
     />
   );
 };
@@ -118,7 +118,7 @@ export default function TaskCreateForm({ onCreate }) {
             <Field
               as="select"
               name="category"
-              className="w-full appearance-none px-4 py-2 pr-10 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full appearance-none px-4 py-2 pr-10 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
             >
               <option value="">Select category</option>
               {Object.entries(CATEGORY_OPTIONS).map(([key, value]) => (
@@ -161,12 +161,12 @@ export default function TaskCreateForm({ onCreate }) {
 
           {/* Due Date */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
-            <DatePickerField name="dueDate" />
+            <label className="block text-sm font-medium text-gray-700 mb-1 ">Due Date</label>
+            <DatePickerField name="dueDate"/>
             <ErrorMessage
               name="dueDate"
               component="div"
-              className="text-red-500 text-sm mt-1"
+              className="text-red-500 text-sm mt-1 "
             />
           </div>
 

@@ -11,6 +11,9 @@ const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
+  resetTasks() {
+    return initialState;
+  }
   },
   extraReducers: (builder) =>
     builder
@@ -65,5 +68,5 @@ const tasksSlice = createSlice({
       }),
 });
 
-export const { clearTaskError } = tasksSlice.actions;
+export const { resetTasks } = tasksSlice.actions;
 export default tasksSlice.reducer;
